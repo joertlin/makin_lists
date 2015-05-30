@@ -23,7 +23,7 @@ class Checklist(models.Model):
 		else:
 			return True 
 
-'''
+
 class AllItems(models.Model):
 	"""
 	This is a list of all the items users have ever input into any list.
@@ -51,4 +51,3 @@ class ListItems(models.Model):
 			return True
 		else:
 			return False
-'''
