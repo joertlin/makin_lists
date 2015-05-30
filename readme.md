@@ -5,7 +5,7 @@ An intelligent way to start makin' your grocery or shopping list.
 ## The Obvious
 This is a list organization tool brought about by the less than pleasant experience of using built in notepad apps as a list tool for makin' groceries.
 
-##\ Lists
+## Lists
 Grocery lists are made using one of all of the following ways:
 
 1.  Adding items one by one
@@ -24,14 +24,12 @@ There are some fun things goin on in the background.  The order of marking is re
 ## The Bill
 This app is a learning tool for the design team, but any funds would initally be scaled to the cost of deployment
 
-## Technology Stac
+## Technology Stack
 Extensive use of python will likely be used due to the team's familiarity.
 
 Backend work will likely use postgres to store user info, shopping lists, recipes, and any additional data needed for the app.
 
-This database will be accessed with flask.
-
-Frontend is a complete mystery to me now.  The team will investigate django initally for HTML generation, but this is completely undecided.
+This database,application, and front end will be built with django.
 
 ## Documentation
 all documentation will be done with Sphinx.
