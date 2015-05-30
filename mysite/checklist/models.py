@@ -23,6 +23,17 @@ class Checklist(models.Model):
 		else:
 			return True 
 
+'''
+class AllItems(models.Model):
+	"""
+	This is a list of all the items users have ever input into any list.
+	"""
+	item_id = models.AutoField(primary_key = True)
+	item_name = models.CharField(max_length = 10)
+
+	def __str__(self):
+		return self.item_name
+
 class ListItems(models.Model):
 	"""
 	This is the table with all of the lists that users generate.
@@ -40,13 +51,4 @@ class ListItems(models.Model):
 			return True
 		else:
 			return False
-
-class AllItems(models.Model):
-	"""
-	This is a list of all the items users have ever input into any list.
-	"""
-	item_id = models.AutoField(primary_key = True)
-	item_name = models.CharField(max_length = 10)
-
-	def __str__(self):
-		return self.item_name
+'''
