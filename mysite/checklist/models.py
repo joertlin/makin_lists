@@ -40,7 +40,7 @@ class ListContent(models.Model):
 	"""
 	content_id = models.AutoField(primary_key  = True)
 	list_id = models.ForeignKey(Checklist, db_column = 'list_id')
-	item_id = models.ManyToManyField(ListItem)
+	item_id = models.ForeignKey(ListItem, db_column = 'item_id')
 	item_quantity = models.CharField(max_length = 10)
 	date_checked_off = models.DateTimeField('date item was checked off', null = True,blank = True)
 	
