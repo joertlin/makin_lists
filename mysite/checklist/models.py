@@ -38,16 +38,24 @@ class ListContent(models.Model):
 	"""
 	This is the table with all of the lists that users generate.
 	"""
+	content_id = models.AutoField(primary_key  = True)
 	list_id = models.ForeignKey(Checklist, db_column = 'list_id')
 	item_id = models.ManyToManyField(ListItem)
 	item_quantity = models.CharField(max_length = 10)
 	date_checked_off = models.DateTimeField('date item was checked off', null = True,blank = True)
 	
 	def __str__(self):
+		#self.item_quantity = item_quantity
+		#self.item_id = item_id
 		return self.item_quantity
 
 	def is_a_checked_off_item(self):
 		if self.date_checked_off == None:
-			return True
-		else:
 			return False
+		else:
+			return True
+
+	def get_item_name(self):
+		item = ListItem.objects.get(item_id = self.item_id)
+
+		return item.item_name
