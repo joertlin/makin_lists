@@ -22,6 +22,9 @@ class Checklist(models.Model):
 			return False
 		else:
 			return True 
+	is_a_complete_list.admin_order_field = 'date_completed'
+	is_a_complete_list.boolean = True
+	is_a_complete_list.short_description = 'Was the list finished?'
 
 
 class ListItem(models.Model):
@@ -60,3 +63,6 @@ class ListContent(models.Model):
 			return False
 		else:
 			return True
+	is_a_checked_off_item.admin_order_field = 'date_checked_off'
+	is_a_checked_off_item.boolean = True
+	is_a_checked_off_item.short_description = 'Item checked off?'
