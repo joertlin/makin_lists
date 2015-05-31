@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Checklist, ListItem, ListContent
+from .models import Checklist, ListItem, ListContent, Unit
 # Register your models here.
 
 class ChecklistAdmin(admin.ModelAdmin):
@@ -12,14 +12,21 @@ class ListContentAdmin(admin.ModelAdmin):
 	"""
 	Formatting Contents to be shown on the admin page.
 	"""
-	list_display = ('content_id','list_id','item_quantity','date_checked_off','is_a_checked_off_item')
+	list_display = ('content_id','list_id','item_id','item_quantity','unit_name','date_checked_off','is_a_checked_off_item')
 
 class ListItemAdmin(admin.ModelAdmin):
 	"""
-	Formattin an admin view for the ListItem model.  This model contains all of the items in the database.
+	Formatting an admin view for the ListItem model.  This model contains all of the items in the database.
 	"""
 	list_display = ('item_id','item_name')
+
+class UnitAdmin(admin.ModelAdmin):
+	"""
+	Formatting a list of units that are available to the user.
+	"""
+	list_display = ('unit_id','unit_name')
 
 admin.site.register(Checklist,ChecklistAdmin)
 admin.site.register(ListItem,ListItemAdmin)
 admin.site.register(ListContent,ListContentAdmin)
+admin.site.register(Unit,UnitAdmin)
