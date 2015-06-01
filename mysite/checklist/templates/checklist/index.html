@@ -1,0 +1,10 @@
+<h1>All available lists.</h1>
+{% if ordered_checklists %}
+    <ul>
+    {% for list in ordered_checklists %}
+        <li><a href="{% url 'checklist:detail' list.list_id %}">{{ list.list_name }} </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No checklists are available.</p>
+{% endif %}

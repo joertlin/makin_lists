@@ -1,0 +1,6 @@
+<h1>Checklist: {{ checklist.list_name }}</h1>
+    <ul>
+    {% for item in filtered_items %}
+        <li><a href="/checklist/{{ checklist.list_id }}/">{{ item.item_id }}, {{item.item_quantity}}, {{item.unit_name}}</a></li>
+    {% endfor %}
+    </ul>
