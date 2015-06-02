@@ -16,7 +16,7 @@ def index(request):
 
 def detail(request, list_id):
 	try:
-		filtered_items = ListContent.objects.all().filter(list_id = list_id)
+		filtered_items = ListContent.objects.all().filter(list_id = list_id).order_by('-date_checked_off')
 	except filtered_items.DoesNotExist:
 		raise Http404("Requested list does not exist.")
 	
@@ -24,3 +24,16 @@ def detail(request, list_id):
 	context = RequestContext(request,{'filtered_items':filtered_items,'checklist':checklist})
 	
 	return render(request, 'checklist/detail.html', context)
+
+def check_off(request, list_id, content_id):
+    l  = get_object_or_404(Checklist, pk=list_id)
+    c = get_object_or_404(ListContent, pk=content_id)
+
+    if c.date_checked_off == None:
+    	c.date_checked_off = timezone.now()
+    else:
+    	c.date_checked_off = None
+    c.save()
+
+    #return HttpResponse('looking at list %s, and you checked item %s' %(l.list_name , c.item_id))
+    return detail(request,list_id)

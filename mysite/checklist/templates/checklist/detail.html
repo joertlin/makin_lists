@@ -1,6 +1,15 @@
 <h1>Checklist: {{ checklist.list_name }}</h1>
-    <ul>
-    {% for item in filtered_items %}
-        <li><a href="/checklist/{{ checklist.list_id }}/">{{ item.item_id }}, {{item.item_quantity}}, {{item.unit_name}}</a></li>
-    {% endfor %}
-    </ul>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+{% for item in filtered_items %}
+	<form action="{% url 'checklist:check_off' checklist.list_id item.content_id %}" method="post">
+	{% csrf_token %}
+    	
+    <input type="checkbox" name="choice{{ forloop.counter }}" value="{{ item.item_id }}" onclick = "this.form.submit()" 
+    	{% if item.is_a_checked_off_item %}checked{% endif %}>
+    <label for="choice{{ forloop.counter }}">{{ item.item_id }}</label><br />
+
+	</form>
+{% endfor %}
