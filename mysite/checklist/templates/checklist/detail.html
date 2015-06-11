@@ -1,9 +1,17 @@
-<h1>Checklist: {{ checklist.list_name }}</h1>
+<!doctype html>
+<html>
+<head>
+	<title> D3 Code</title>
+	<script src = "http://d3js.org/d3.v3.min.js"></script>
+</head>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<body>
+	<h1>Checklist: {{ checklist.list_name }}</h1>
+
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 
-{% for item in filtered_items %}
+	{% for item in filtered_items %}
 	<form action="{% url 'checklist:check_off' checklist.list_id item.content_id %}" method="post">
 	{% csrf_token %}
     	
@@ -12,4 +20,6 @@
     <label for="choice{{ forloop.counter }}">{{ item.item_id }}</label><br />
 
 	</form>
-{% endfor %}
+
+	{% endfor %}
+</body>

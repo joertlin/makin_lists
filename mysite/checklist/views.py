@@ -2,9 +2,11 @@
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext, loader
-from django.core.urlresolvers import reverse
-from django.views import generic
 from django.utils import timezone
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
+
+from django.conf.urls import url
 
 from .models import Checklist,Unit,ListItem,ListContent
 
@@ -34,6 +36,4 @@ def check_off(request, list_id, content_id):
     else:
     	c.date_checked_off = None
     c.save()
-
-    #return HttpResponse('looking at list %s, and you checked item %s' %(l.list_name , c.item_id))
-    return detail(request,list_id)
+    return redirect('checklist:detail',list_id)
