@@ -12,7 +12,7 @@
 
 
 	{% for item in filtered_items %}
-	<form action="{% url 'checklist:check_off' checklist.list_id item.content_id %}" method="post">
+	<form action="{% url 'check_off' checklist.list_id item.content_id %}" method="post">
 	{% csrf_token %}
     	
     <input type="checkbox" name="choice{{ forloop.counter }}" value="{{ item.item_id }}" onclick = "this.form.submit()" 
@@ -22,4 +22,7 @@
 	</form>
 
 	{% endfor %}
+</body>
+<body>
+	<a href="{% url 'index' %}"><h2>Back to your lists.</h2></a>
 </body>

@@ -36,4 +36,4 @@ def check_off(request, list_id, content_id):
     else:
     	c.date_checked_off = None
     c.save()
-    return redirect('checklist:detail',list_id)
+    return redirect('detail',list_id)

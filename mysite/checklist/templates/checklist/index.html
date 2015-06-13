@@ -1,8 +1,8 @@
-<h1>All available lists.</h1>
+<h1>All of your lists.</h1>
 {% if ordered_checklists %}
     <ul>
     {% for list in ordered_checklists %}
-        <li><a href="{% url 'checklist:detail' list.list_id %}">{{ list.list_name }} </a></li>
+        <li><a href="{% url 'detail' list.list_id %}">{{ list.list_name }} </a></li>
     {% endfor %}
     </ul>
 {% else %}
