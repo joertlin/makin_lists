@@ -14,6 +14,7 @@ urlpatterns = [
 	# ex: /checklist/5/
 	url(r'^(?P<list_id>[0-9]+)/$', views.detail, name = 'detail'),
 	url(r'^(?P<list_id>[0-9]+)/check/(?P<content_id>[0-9]+)/$', views.check_off, name = 'check_off'),
+	url(r'^test/$', views.test_jquery, name = 'test_jquery'),
 	#url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name = 'detail'),
 	# ex: /checklist/5/restuls/
 	#url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name = 'results'),

@@ -37,3 +37,9 @@ def check_off(request, list_id, content_id):
     	c.date_checked_off = None
     c.save()
     return redirect('detail',list_id)
+
+def test_jquery(request):
+	ordered_checklists = Checklist.objects.order_by('-date_created')
+	context = RequestContext(request,{'ordered_checklists':ordered_checklists})
+	
+	return render(request, 'checklist/test_jquery.html')
