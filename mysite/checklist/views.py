@@ -8,6 +8,10 @@ from django.core.urlresolvers import reverse
 
 from django.conf.urls import url
 
+from django.contrib.auth.models import User
+
+import json
+
 from .models import Checklist,Unit,ListItem,ListContent
 
 def index(request):
@@ -43,3 +47,19 @@ def test_jquery(request):
 	context = RequestContext(request,{'ordered_checklists':ordered_checklists})
 	
 	return render(request, 'checklist/test_jquery.html')
+
+def add_checklist(request):
+    if request.method == 'GET':
+        test =  'you\'ve submitted a GET request to add_checklist.  nothing really hapened thou.'
+
+    elif request.method == 'POST':
+        test =  'POST Data:' +  request.POST['checklist_name'] + ' user: ' + 'jeremiah'
+        u = User.objects.get(username = 'jeremiah')
+        c = Checklist(list_name = request.POST['checklist_name'], date_created = timezone.now(), user = u)
+        c.save()
+
+        entry = {'list_name': request.POST['checklist_name'],'pk': c.list_id}
+
+        return HttpResponse( json.dumps(entry) )
+
+    return HttpResponse(test)

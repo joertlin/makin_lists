@@ -1,10 +1,16 @@
 <h1>All of your lists.</h1>
 {% if ordered_checklists %}
-    <ul>
+    <ul id = "checklists">
     {% for list in ordered_checklists %}
         <li><a href="{% url 'detail' list.list_id %}">{{ list.list_name }} </a></li>
     {% endfor %}
     </ul>
-{% else %}
+    <b>New Listname: </b><input type = 'text' id = "checklist_name" >
+    <p><button id = "add_checklist">Add List !!!</button></p>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    {% load staticfiles %}
+    <script src = "{% static "main.js" %}"></script>
+    {% else %}
     <p>No checklists are available.</p>
 {% endif %}
