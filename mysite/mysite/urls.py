@@ -25,4 +25,5 @@ urlpatterns = [
     #url(r'^checklist/', include('checklist.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', auth_views.login),
+    url('^', include('django.contrib.auth.urls'))
 ]

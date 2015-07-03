@@ -17,11 +17,12 @@ from .models import Checklist,Unit,ListItem,ListContent
 
 @login_required()
 def index(request):
-	ordered_checklists = Checklist.objects.order_by('-date_created')
+	ordered_checklists = Checklist.objects.filter(user_id = request.user).order_by('-date_created')
 	context = RequestContext(request,{'ordered_checklists':ordered_checklists})
 	
 	return render(request, 'checklist/index.html', context)
 
+@login_required()
 def detail(request, list_id):
 	try:
 		filtered_items = ListContent.objects.all().filter(list_id = list_id).order_by('-date_checked_off')
@@ -33,6 +34,7 @@ def detail(request, list_id):
 	
 	return render(request, 'checklist/detail.html', context)
 
+@login_required()
 def check_off(request, list_id, content_id):
     l  = get_object_or_404(Checklist, pk=list_id)
     c = get_object_or_404(ListContent, pk=content_id)
@@ -44,6 +46,7 @@ def check_off(request, list_id, content_id):
     c.save()
     return redirect('detail',list_id)
 
+@login_required()
 def test_jquery(request):
 	ordered_checklists = Checklist.objects.order_by('-date_created')
 	context = RequestContext(request,{'ordered_checklists':ordered_checklists})
