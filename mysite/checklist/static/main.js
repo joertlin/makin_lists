@@ -41,7 +41,6 @@ $( document ).ready(function() {
 
     $('#add_checklist').on('click', function(){
         if (checklist_name.val() != '') {
-            //alert('error in checking logic of filled name field.')
             $.ajax({
                 type: 'POST',
                 url: 'add_checklist' + "/",

@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 
 from django.conf.urls import url
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
 
@@ -14,6 +15,7 @@ import json
 
 from .models import Checklist,Unit,ListItem,ListContent
 
+@login_required()
 def index(request):
 	ordered_checklists = Checklist.objects.order_by('-date_created')
 	context = RequestContext(request,{'ordered_checklists':ordered_checklists})
@@ -48,13 +50,15 @@ def test_jquery(request):
 	
 	return render(request, 'checklist/test_jquery.html')
 
+@login_required()
 def add_checklist(request):
     if request.method == 'GET':
         test =  'you\'ve submitted a GET request to add_checklist.  nothing really hapened thou.'
 
     elif request.method == 'POST':
         test =  'POST Data:' +  request.POST['checklist_name'] + ' user: ' + 'jeremiah'
-        u = User.objects.get(username = 'jeremiah')
+        #u = User.objects.get(username = 'jeremiah')
+        u = request.user
         c = Checklist(list_name = request.POST['checklist_name'], date_created = timezone.now(), user = u)
         c.save()
 
