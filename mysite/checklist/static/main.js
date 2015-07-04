@@ -45,9 +45,12 @@ $( document ).ready(function() {
                 type: 'POST',
                 url: 'add_checklist' + "/",
                 data: {checklist_name: checklist_name.val()},
-                success: function(newChecklist) {
-                    newChecklist = JSON.parse(newChecklist);
-                    append_new_checklist(newChecklist);
+                success: function(gotoList) {
+                    gotoList = JSON.parse(gotoList);
+                    url = gotoList.pk + "/";
+                    $( location ).attr("href", url);
+                    // newChecklist = JSON.parse(newChecklist);
+                    // append_new_checklist(newChecklist);
                     //alert('new entry:' + newChecklist.list_name);
                 },
                 error: function() {

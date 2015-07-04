@@ -15,6 +15,14 @@ import json
 
 from .models import Checklist,Unit,ListItem,ListContent
 
+def get_filtered_items(list_id):
+    #try:
+    filtered_items = ListContent.objects.all().filter(list_id = list_id).order_by('-date_checked_off')
+    #except filtered_items.DoesNotExist:
+    #    raise Http404("Requested list does not exist.")
+
+    return filtered_items
+
 @login_required()
 def index(request):
 	ordered_checklists = Checklist.objects.filter(user_id = request.user).order_by('-date_created')
@@ -24,11 +32,7 @@ def index(request):
 
 @login_required()
 def detail(request, list_id):
-	try:
-		filtered_items = ListContent.objects.all().filter(list_id = list_id).order_by('-date_checked_off')
-	except filtered_items.DoesNotExist:
-		raise Http404("Requested list does not exist.")
-	
+	filtered_items = get_filtered_items(list_id)
 	checklist = Checklist.objects.get(pk = list_id)
 	context = RequestContext(request,{'filtered_items':filtered_items,'checklist':checklist})
 	
@@ -44,6 +48,30 @@ def check_off(request, list_id, content_id):
     else:
     	c.date_checked_off = None
     c.save()
+
+    filtered_items = get_filtered_items(list_id)
+    completion = []
+
+    for filtered_item in filtered_items:
+        #print filtered_item.date_checked_off
+        #fc = get_object_or_404(ListContent, pk=filtered_item.content_id)
+    
+        if filtered_item.date_checked_off == None:
+            completion.append(False)
+        else:
+            #print('test')
+            completion.append(True)
+    
+    if False in completion:
+        l.date_completed = None
+
+
+    else:
+        l.date_completed = timezone.now()
+    
+    #l.date_completed = None    
+    l.save()
+    
     return redirect('detail',list_id)
 
 @login_required()
