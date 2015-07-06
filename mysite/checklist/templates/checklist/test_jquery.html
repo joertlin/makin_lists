@@ -1,67 +1,24 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Demo</title>
-    <style>
-    a.test {
-    	font-weight: bold;
-    	}
-    </style>
-</head>
-<body>
-    <meta charset="utf-8">
-    <a href="http://jquery.com/">jQuery</a>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>
- 
-    // Your code goes here.
-    $( document ).ready(function() {
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie != '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-        var csrftoken = getCookie('csrftoken');
-        //var csrftoken = $.cookie('csrftoken');
-
-        //$( "a" ).addClass( "test" );
-        //
-    	//$( "a" ).click(function( event ) {
-       	//	alert( "Doesnt' take you to jquery.com!!!" );
-    	//	event.preventDefault();
-    	//	$( this ).hide( "slow" );
-    	//	});
-    	////$( "a" ).removeClass( "test" );
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-        $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
-
-        $.ajax({
-            type: 'POST',
-            url: '/checklist/2/check/7/',
-            });
-
-    	});
- 
-    </script>
-</body>
+    <head>
+        <title>Bootstrap Demo</title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static "main.css" %}">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="darkBG col-sm-6 col-xs-12">test</div>
+                <div class="darkerBG col-sm-3 col-xs-6">test2</div>
+                <div class="darkestBG col-sm-3 col-xs-6">test3</div>
+    
+            </div>
+        </div>    
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script
+    </body>
 </html>

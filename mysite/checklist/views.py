@@ -65,19 +65,17 @@ def check_off(request, list_id, content_id):
     if False in completion:
         l.date_completed = None
 
-
     else:
         l.date_completed = timezone.now()
     
-    #l.date_completed = None    
     l.save()
     
     return redirect('detail',list_id)
 
 @login_required()
 def test_jquery(request):
-	ordered_checklists = Checklist.objects.order_by('-date_created')
-	context = RequestContext(request,{'ordered_checklists':ordered_checklists})
+	#ordered_checklists = Checklist.objects.order_by('-date_created')
+	#context = RequestContext(request,{'ordered_checklists':ordered_checklists})
 	
 	return render(request, 'checklist/test_jquery.html')
 
