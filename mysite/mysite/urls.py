@@ -20,7 +20,7 @@ from django.contrib.auth import views as auth_views
 from home import views
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^$', views.index, name='home'),
     url(r'^checklist/', include('checklist.urls')),
     #url(r'^checklist/', include('checklist.urls')),
     url(r'^admin/', include(admin.site.urls)),
