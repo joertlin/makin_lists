@@ -5,6 +5,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     {% load staticfiles %}
     <script src = "{% static "main.js" %}"></script>
+    <input type="hidden" id="indexPath" name="index_path" value="{% url 'index' %}">
 </head>
 
 <h1>All of your lists.</h1>

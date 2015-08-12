@@ -76,8 +76,12 @@ def check_off(request, list_id, content_id):
 def test_jquery(request):
 	#ordered_checklists = Checklist.objects.order_by('-date_created')
 	#context = RequestContext(request,{'ordered_checklists':ordered_checklists})
+    ordered_checklists = Checklist.objects.filter(user_id = request.user).order_by('-date_created')
+    context = RequestContext(request,{'ordered_checklists':ordered_checklists})
+    
+    return render(request, 'checklist/test_jquery.html', context)
 	
-	return render(request, 'checklist/test_jquery.html')
+	#return render(request, 'checklist/test_jquery.html')
 
 @login_required()
 def add_checklist(request):

@@ -21,7 +21,8 @@ $( document ).ready(function() {
     
     function append_new_checklist(data){
         if (data.list_name != '') {
-            checklists.append('<li><a href="' + data.pk + '/">' + data.list_name + '</a></li>');
+            checklists.append('<button type="button" class="list-group-item">' + data.list_name + '</button>')
+            //checklists.append('<li><a href="' + data.pk + '/">' + data.list_name + '</a></li>');
         }
     };
 
@@ -39,18 +40,20 @@ $( document ).ready(function() {
         }
     });
 
+    var indexPath = document.getElementById("indexPath").value;
+
     $('#add_checklist').on('click', function(){
         if (checklist_name.val() != '') {
             $.ajax({
                 type: 'POST',
-                url: 'add_checklist' + "/",
+                url: indexPath + 'add_checklist' + "/",
                 data: {checklist_name: checklist_name.val()},
                 success: function(gotoList) {
-                    gotoList = JSON.parse(gotoList);
-                    url = gotoList.pk + "/";
-                    $( location ).attr("href", url);
-                    // newChecklist = JSON.parse(newChecklist);
-                    // append_new_checklist(newChecklist);
+                    //gotoList = JSON.parse(gotoList);
+                    //url = indexPath + gotoList.pk + "/";
+                    //$( location ).attr("href", url);
+                    newChecklist = JSON.parse(gotoList);
+                    append_new_checklist(newChecklist);
                     //alert('new entry:' + newChecklist.list_name);
                 },
                 error: function() {

@@ -2,12 +2,14 @@
 <html>
     <head>
         <title>Bootstrap Demo</title>
-        {% load staticfiles %}
-        <link rel="stylesheet" href="{% static "main.css" %}">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <input type="hidden" id="indexPath" name="index_path" value="{% url 'index' %}">
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static "main.css" %}">
+
     </head>
     <body>
         <nav class="navbar navbar-inverse">
@@ -27,42 +29,53 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="{% url 'index' %}">All Lists <span class="sr-only">(current)</span></a></li>
-                <li>
-                  <a class="dropdown">New List</a>
-                </li>
-                <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Recent Lists <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
               </ul>
-              <form class="navbar-form navbar-left" role="new_list">
+              <form class="navbar-form navbar-left">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Add New List" id = "checklist_name">
+                    <input type="text" class="form-control" placeholder="Add New List" id = "checklist_name">
                 </div>
-                <button type="new_list" class="btn btn-default" id = "add_checklist">Add!!!</button>
+                    <button type = "button" class="btn btn-default" id = "add_checklist">Add!!!</button>
               </form>
+              <ul class="navbar-right">
+                <p class="navbar-text">{{ user.get_full_name }} <a class="button" href="{% url 'logout' %}">Logout</a></p>
+              </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
+
         <div class="container">
-            <div class="row">
-                <div class="darkBG col-sm-6 col-xs-12">test</div>
-                <div class="darkerBG col-sm-3 col-xs-6">test2</div>
-                <div class="darkestBG col-sm-3 col-xs-6">test3</div>
-    
+          {% if ordered_checklists %}
+            <div class="list-group" id = 'checklists'>
+              {% for list in ordered_checklists %}
+                <button type="button" class="list-group-item">{{ list.list_name }}</button>
+              {% endfor %}
             </div>
-        </div>    
+          {% else %}
+            <p>No checklists are available.</p>
+          {% endif %}
+        </div>
+        <!-- <div class="container"> -->
+          <!-- <div class="darkBG col-sm-12 col-xs-12"> -->
+            <!-- <div class="btn-group btn-group-justified" role="group" aria-label="..."> -->
+              <!-- <div class="btn-group"> -->
+                <!-- <a type="button" class="btn btn-default btn-lg round">Bread</a> -->
+              <!-- </div> -->
+            <!-- </div> -->
+          <!-- </div>      -->
+        <!-- </div> -->
+        <!-- <div class="container"> -->
+          <!-- <div class="darkBG col-sm-12 col-xs-12"> -->
+            <!-- <div class="btn-group btn-group-justified" role="group" aria-label="..."> -->
+              <!-- <div class="btn-group"> -->
+                <!-- <a type="button" class="btn btn-default btn-lg round">Milk</a> -->
+              <!-- </div> -->
+            <!-- </div> -->
+          <!-- </div>      -->
+        <!-- </div> -->
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        {% load staticfiles %}
         <script src = "{% static "main.js" %}"></script>
     </body>
 </html>
